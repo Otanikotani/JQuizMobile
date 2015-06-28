@@ -3,27 +3,30 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 tools:context="org.jquizmobile.app.QuestionActivity">
-
-
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Question"
+            android:id="@+id/questionView"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"/>
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout"
-            android:layout_centerVertical="true"
+            android:id="@+id/questionsLayout"
+            android:layout_below="@+id/questionView"
             android:layout_centerHorizontal="true">
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Question"
-                android:id="@+id/questionView"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="50dp"/>
-        <Button android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:text="@string/answer_button_text"
-                android:id="@+id/answerButton"
-                android:layout_marginTop="50dp"/>
     </LinearLayout>
+    <Button android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="@string/answer_button_text"
+            android:id="@+id/answerButton"
+            android:onClick="onAnswerClick"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="100dp"/>
 </RelativeLayout>
