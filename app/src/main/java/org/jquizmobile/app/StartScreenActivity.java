@@ -14,12 +14,12 @@ public class StartScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start_screen);
     }
 
-    public void onStartClicked(View v) {
+    public void onStartButtonClicked(View v) {
         Intent questionActivity = new Intent(this, QuestionActivity.class);
         startActivity(questionActivity);
     }
 
-    public void onHighscoreClicked(View v) {
+    public void onHighscoreButtonClicked(View v) {
 
     }
 }

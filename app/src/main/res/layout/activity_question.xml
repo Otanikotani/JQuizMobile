@@ -7,6 +7,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/app_name"
+            android:id="@+id/jQuizLabelView"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/questionsNumberView"
+            android:layout_alignTop="@+id/jQuizLabelView"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+    <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#c0c0c0"
+            android:layout_below="@+id/jQuizLabelView"/>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Question"
             android:id="@+id/questionView"
             android:layout_gravity="center_horizontal"
@@ -15,17 +39,18 @@
             android:layout_marginTop="50dp"/>
     <LinearLayout
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/questionsLayout"
             android:layout_below="@+id/questionView"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp">
     </LinearLayout>
     <Button android:layout_width="200dp"
             android:layout_height="50dp"
             android:text="@string/answer_button_text"
             android:id="@+id/answerButton"
-            android:onClick="onAnswerClick"
+            android:onClick="onAnswerButtonClick"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="100dp"/>

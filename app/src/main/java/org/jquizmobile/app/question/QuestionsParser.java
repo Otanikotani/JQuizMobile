@@ -7,11 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class QuestionsParser {
 
     public static final Logger logger = LoggerFactory.getLogger(QuestionsParser.class);
+
+    private static final int MAX_QUESTIONS_NUMBER = 5;
 
     private static final String QUESTIONS = "questions";
 
@@ -37,7 +40,17 @@ public class QuestionsParser {
         this.questionsObject = questionsObject;
     }
 
-    public List<Question> parse() {
+    public List<Question> getRandomQuestions() {
+        List<Question> randomQuestions = new ArrayList<Question>();
+        List<Question> allQuestions = parse();
+        if (allQuestions != null && !allQuestions.isEmpty()) {
+            Collections.shuffle(allQuestions);
+            randomQuestions.addAll(allQuestions.subList(0, MAX_QUESTIONS_NUMBER));
+        }
+        return randomQuestions;
+    }
+
+    private List<Question> parse() {
         List<Question> questions = new ArrayList<Question>();
         try {
             JSONArray questionsJsonArray = questionsObject.getJSONArray(QUESTIONS);

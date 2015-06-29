@@ -22,7 +22,7 @@
                 android:textColor="@color/abc_primary_text_material_dark"
                 android:id="@+id/startButton"
                 android:layout_marginTop="50dp"
-                android:onClick="onStartClicked"/>
+                android:onClick="onStartButtonClicked"/>
         <Button
                 android:layout_width="200dp"
                 android:layout_height="50dp"
@@ -30,6 +30,6 @@
                 android:textColor="@color/abc_primary_text_material_dark"
                 android:id="@+id/highscoreButton"
                 android:layout_marginTop="50dp"
-                android:onClick="onHighscoreClicked"/>
+                android:onClick="onHighscoreButtonClicked"/>
     </LinearLayout>
 </RelativeLayout>
