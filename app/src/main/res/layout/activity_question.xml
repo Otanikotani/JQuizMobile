@@ -53,6 +53,5 @@
             android:onClick="onAnswerButtonClick"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="100dp"
-            android:background="@color/colors"/>
+            android:layout_marginBottom="100dp"/>
 </RelativeLayout>
