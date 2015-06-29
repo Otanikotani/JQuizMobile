@@ -2,7 +2,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                tools:context="org.jquizmobile.app.QuestionActivity">
+                tools:context="org.jquizmobile.app.QuestionsActivity">
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,5 +53,6 @@
             android:onClick="onAnswerButtonClick"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="100dp"/>
+            android:layout_marginBottom="100dp"
+            android:background="@color/colors"/>
 </RelativeLayout>
