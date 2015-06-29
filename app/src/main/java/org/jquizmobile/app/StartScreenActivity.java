@@ -15,7 +15,7 @@ public class StartScreenActivity extends AppCompatActivity {
     }
 
     public void onStartButtonClicked(View v) {
-        Intent questionActivity = new Intent(this, QuestionActivity.class);
+        Intent questionActivity = new Intent(this, QuestionsActivity.class);
         startActivity(questionActivity);
     }
 

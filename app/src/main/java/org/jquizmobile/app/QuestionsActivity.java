@@ -1,5 +1,6 @@
 package org.jquizmobile.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,9 +19,9 @@ import java.io.StringWriter;
 import java.util.List;
 
 
-public class QuestionActivity extends AppCompatActivity {
+public class QuestionsActivity extends AppCompatActivity {
 
-    public static final Logger logger = LoggerFactory.getLogger(QuestionActivity.class);
+    public static final Logger logger = LoggerFactory.getLogger(QuestionsActivity.class);
 
     private List<Question> questions;
 
@@ -53,18 +54,14 @@ public class QuestionActivity extends AppCompatActivity {
         };
         questionsNumberView = (TextView) findViewById(R.id.questionsNumberView);
         loadQuestions();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         loadQuestion();
     }
 
     public void onAnswerButtonClick(View view) {
         currentQuestionIndex++;
         if (!hasNextQuestion()) {
-            //todo
+            Intent finalScreenActivity = new Intent(this, FinalScreenActivity.class);
+            startActivity(finalScreenActivity);
         } else {
             loadQuestion();
         }

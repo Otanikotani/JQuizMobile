@@ -17,8 +17,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".QuestionActivity"
+            android:name=".QuestionsActivity"
             android:label="@string/title_activity_question" >
+        </activity>
+        <activity
+            android:name=".FinalScreenActivity"
+            android:label="@string/title_activity_final_screen" >
         </activity>
     </application>
 
