@@ -1,8 +1,9 @@
 package org.jquizmobile.app.question;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Question {
+public class Question implements Serializable {
 
     private String questionText;
 
@@ -16,6 +17,15 @@ public class Question {
 
     public Question() {
 
+    }
+
+    public void makeAnswerSelected(String answerText) {
+        for (Answer answer : answers) {
+            if (answer.getAnswerText().equals(answerText)) {
+                answer.setIsSelected(true);
+                break;
+            }
+        }
     }
 
     public String getQuestionText() {

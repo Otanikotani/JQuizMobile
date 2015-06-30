@@ -14,7 +14,7 @@ public class QuestionsParser {
 
     public static final Logger logger = LoggerFactory.getLogger(QuestionsParser.class);
 
-    private static final int MAX_QUESTIONS_NUMBER = 5;
+    public static final int MAX_QUESTIONS_NUMBER = 5;
 
     private static final String QUESTIONS = "questions";
 

@@ -1,12 +1,16 @@
 package org.jquizmobile.app.question;
 
-public class Answer {
+import java.io.Serializable;
+
+public class Answer implements Serializable {
 
     private String answerText;
 
     private boolean isCorrect;
 
     private String description;
+
+    private boolean isSelected;
 
     public Answer() {
     }
@@ -33,5 +37,13 @@ public class Answer {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setIsSelected(boolean isSelected) {
+        this.isSelected = isSelected;
     }
 }

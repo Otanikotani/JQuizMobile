@@ -23,6 +23,8 @@ public class QuestionsActivity extends AppCompatActivity {
 
     public static final Logger logger = LoggerFactory.getLogger(QuestionsActivity.class);
 
+    public static final String QUESTION_ID = "question_id_";
+
     private List<Question> questions;
 
     private int currentQuestionIndex;
@@ -36,6 +38,8 @@ public class QuestionsActivity extends AppCompatActivity {
     private Button answerButton;
 
     private TextView questionsNumberView;
+
+    private RadioGroup answersGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +62,14 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
     public void onAnswerButtonClick(View view) {
+        addAnswersToSelected();
         currentQuestionIndex++;
         if (!hasNextQuestion()) {
             Intent finalScreenActivity = new Intent(this, FinalScreenActivity.class);
+            for (Question question : questions) {
+                int questionIndex = questions.indexOf(question);
+                finalScreenActivity.putExtra(QUESTION_ID + questionIndex, question);
+            }
             startActivity(finalScreenActivity);
         } else {
             loadQuestion();
@@ -95,7 +104,6 @@ public class QuestionsActivity extends AppCompatActivity {
                 }
             }
         } else {
-            RadioGroup answersGroup = (RadioGroup) questionsLayout.findViewById(R.id.answersGroupId);
             return answersGroup.getCheckedRadioButtonId() > -1;
         }
         return false;
@@ -119,7 +127,11 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
     private void loadSingleAnswerChoice(Question currentQuestion) {
-        RadioGroup answersGroup = new RadioGroup(this);
+        if (answersGroup != null) {
+            answersGroup.removeAllViews();
+            answersGroup = null;
+        }
+        answersGroup = new RadioGroup(this);
         answersGroup.setId(R.id.answersGroupId);
         for (Answer answer : currentQuestion.getAnswers()) {
             RadioButton answerRadioButton = new RadioButton(this);
@@ -136,6 +148,30 @@ public class QuestionsActivity extends AppCompatActivity {
             answerCheckBox.setText(answer.getAnswerText());
             answerCheckBox.setOnClickListener(onAnswerClickListener);
             questionsLayout.addView(answerCheckBox);
+        }
+    }
+
+    private void addAnswersToSelected() {
+        Question question = questions.get(currentQuestionIndex);
+        if (question.isMultiple()) {
+            addSelectedMultipleAnswers(question);
+        } else {
+            addSelectedSingleAnswer(question);
+        }
+    }
+
+    private void addSelectedSingleAnswer(Question question) {
+        int selectedAnswerRadioId = answersGroup.getCheckedRadioButtonId();
+        String selectedAnswerText = ((RadioButton) findViewById(selectedAnswerRadioId)).getText().toString();
+        question.makeAnswerSelected(selectedAnswerText);
+    }
+
+    private void addSelectedMultipleAnswers(Question question) {
+        for (int i = 0; i < questionsLayout.getChildCount(); i++) {
+            CheckBox answerCheckBox = (CheckBox) questionsLayout.getChildAt(i);
+            if (answerCheckBox.isChecked()) {
+                question.makeAnswerSelected(answerCheckBox.getText().toString());
+            }
         }
     }
 }
