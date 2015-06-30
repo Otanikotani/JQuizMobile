@@ -17,4 +17,7 @@
     <style name="AppTheme.Divider">
         <item name="android:background">#B6B6B6</item>
     </style>
+    <style name="MainTitle">
+        <item name="android:fontFamily">sans-serif-thin</item>
+    </style>
 </resources>

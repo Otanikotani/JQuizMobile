@@ -13,16 +13,18 @@
                     android:padding="@dimen/activity_horizontal_margin"
                     style="@style/AppTheme.ContentLayout">
         <TextView
+                style="@style/MainTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/app_name"
+                android:text="@string/jquiz_label_text"
                 android:id="@+id/jQuizLabelView"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/view_margin_top"
                 android:layout_marginBottom="@dimen/view_margin_bottom"/>
         <TextView
+                style="@style/MainTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"

@@ -1,47 +1,48 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                tools:context="org.jquizmobile.app.StartScreenActivity"
-                android:background="#3F51B5">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="org.jquizmobile.app.StartScreenActivity"
+    android:background="#3F51B5">
     <RelativeLayout android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:minWidth="@dimen/questions_layout_min_width"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_margin="@dimen/view_margin_top"
-                    android:padding="@dimen/activity_horizontal_margin"
-                    style="@style/AppTheme.ContentLayout">
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/questions_layout_min_width"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/view_margin_top"
+        android:padding="@dimen/activity_horizontal_margin"
+        style="@style/AppTheme.ContentLayout">
         <LinearLayout
-                android:orientation="vertical"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/view_margin_top">
+            <TextView
+                style="@style/MainTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/view_margin_top">
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/jquiz_label_text"
-                    android:id="@+id/jQuizLabelView"
-                    android:layout_gravity="center_horizontal"/>
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/jquiz_label_text"
+                android:id="@+id/jQuizLabelView"
+                android:layout_gravity="center_horizontal"/>
             <Button
-                    android:layout_width="@dimen/button_width"
-                    android:layout_height="@dimen/button_height"
-                    android:text="@string/start_button_text"
-                    android:id="@+id/startButton"
-                    android:layout_marginTop="50dp"
-                    android:onClick="onStartButtonClicked"
-                    style="@style/AppTheme.Button"/>
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:text="@string/start_button_text"
+                android:id="@+id/startButton"
+                android:layout_marginTop="50dp"
+                android:onClick="onStartButtonClicked"
+                style="@style/AppTheme.Button"/>
             <Button
-                    android:layout_width="@dimen/button_width"
-                    android:layout_height="@dimen/button_height"
-                    android:text="@string/highscore_button_text"
-                    android:id="@+id/highscoreButton"
-                    android:layout_marginTop="50dp"
-                    android:onClick="onHighscoreButtonClicked"
-                    style="@style/AppTheme.Button"/>
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:text="@string/highscore_button_text"
+                android:id="@+id/highscoreButton"
+                android:layout_marginTop="50dp"
+                android:onClick="onHighscoreButtonClicked"
+                style="@style/AppTheme.Button"/>
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>
