@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true"
+          android:state_enabled="true">
+        <inset xmlns:android="http://schemas.android.com/apk/res/android"
+               android:insetLeft="@dimen/abc_button_inset_horizontal_material"
+               android:insetTop="@dimen/abc_button_inset_vertical_material"
+               android:insetRight="@dimen/abc_button_inset_horizontal_material"
+               android:insetBottom="@dimen/abc_button_inset_vertical_material">
+            <shape android:shape="rectangle">
+                <corners android:radius="@dimen/abc_control_corner_material" />
+                <solid android:color="#303F9F"/>
+                <padding android:left="@dimen/abc_button_padding_horizontal_material"
+                         android:top="@dimen/abc_button_padding_vertical_material"
+                         android:right="@dimen/abc_button_padding_horizontal_material"
+                         android:bottom="@dimen/abc_button_padding_vertical_material" />
+            </shape>
+        </inset>
+    </item>
+    <item android:state_focused="true"
+          android:state_enabled="true">
+        <inset xmlns:android="http://schemas.android.com/apk/res/android"
+               android:insetLeft="@dimen/abc_button_inset_horizontal_material"
+               android:insetTop="@dimen/abc_button_inset_vertical_material"
+               android:insetRight="@dimen/abc_button_inset_horizontal_material"
+               android:insetBottom="@dimen/abc_button_inset_vertical_material">
+            <shape android:shape="rectangle">
+                <corners android:radius="@dimen/abc_control_corner_material" />
+                <solid android:color="#303F9F"/>
+                <padding android:left="@dimen/abc_button_padding_horizontal_material"
+                         android:top="@dimen/abc_button_padding_vertical_material"
+                         android:right="@dimen/abc_button_padding_horizontal_material"
+                         android:bottom="@dimen/abc_button_padding_vertical_material" />
+            </shape>
+        </inset>
+    </item>
+    <item android:state_enabled="true">
+        <inset xmlns:android="http://schemas.android.com/apk/res/android"
+               android:insetLeft="@dimen/abc_button_inset_horizontal_material"
+               android:insetTop="@dimen/abc_button_inset_vertical_material"
+               android:insetRight="@dimen/abc_button_inset_horizontal_material"
+               android:insetBottom="@dimen/abc_button_inset_vertical_material">
+            <shape android:shape="rectangle">
+                <corners android:radius="@dimen/abc_control_corner_material" />
+                <solid android:color="#303F9F"/>
+                <padding android:left="@dimen/abc_button_padding_horizontal_material"
+                         android:top="@dimen/abc_button_padding_vertical_material"
+                         android:right="@dimen/abc_button_padding_horizontal_material"
+                         android:bottom="@dimen/abc_button_padding_vertical_material" />
+            </shape>
+        </inset>
+    </item>
+    <item android:state_enabled="false">
+        <inset xmlns:android="http://schemas.android.com/apk/res/android"
+               android:insetLeft="@dimen/abc_button_inset_horizontal_material"
+               android:insetTop="@dimen/abc_button_inset_vertical_material"
+               android:insetRight="@dimen/abc_button_inset_horizontal_material"
+               android:insetBottom="@dimen/abc_button_inset_vertical_material">
+            <shape android:shape="rectangle">
+                <corners android:radius="@dimen/abc_control_corner_material" />
+                <solid android:color="#B6B6B6"/>
+                <padding android:left="@dimen/abc_button_padding_horizontal_material"
+                         android:top="@dimen/abc_button_padding_vertical_material"
+                         android:right="@dimen/abc_button_padding_horizontal_material"
+                         android:bottom="@dimen/abc_button_padding_vertical_material" />
+            </shape>
+        </inset>
+    </item>
+</selector>

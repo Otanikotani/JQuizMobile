@@ -2,34 +2,46 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                tools:context="org.jquizmobile.app.StartScreenActivity">
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true" android:layout_centerHorizontal="true">
-        <TextView
+                tools:context="org.jquizmobile.app.StartScreenActivity"
+                android:background="#3F51B5">
+    <RelativeLayout android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/questions_layout_min_width"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/view_margin_top"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    style="@style/AppTheme.ContentLayout">
+        <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/jquiz_label_text"
-                android:id="@+id/jQuizLabelView"
-                android:layout_gravity="center_horizontal"/>
-        <Button
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:text="@string/start_button_text"
-                android:textColor="@color/abc_primary_text_material_dark"
-                android:id="@+id/startButton"
-                android:layout_marginTop="50dp"
-                android:onClick="onStartButtonClicked"/>
-        <Button
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:text="@string/highscore_button_text"
-                android:textColor="@color/abc_primary_text_material_dark"
-                android:id="@+id/highscoreButton"
-                android:layout_marginTop="50dp"
-                android:onClick="onHighscoreButtonClicked"/>
-    </LinearLayout>
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/view_margin_top">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/jquiz_label_text"
+                    android:id="@+id/jQuizLabelView"
+                    android:layout_gravity="center_horizontal"/>
+            <Button
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="@dimen/button_height"
+                    android:text="@string/start_button_text"
+                    android:id="@+id/startButton"
+                    android:layout_marginTop="50dp"
+                    android:onClick="onStartButtonClicked"
+                    style="@style/AppTheme.Button"/>
+            <Button
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="@dimen/button_height"
+                    android:text="@string/highscore_button_text"
+                    android:id="@+id/highscoreButton"
+                    android:layout_marginTop="50dp"
+                    android:onClick="onHighscoreButtonClicked"
+                    style="@style/AppTheme.Button"/>
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>
