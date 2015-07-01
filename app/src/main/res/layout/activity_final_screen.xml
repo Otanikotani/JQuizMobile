@@ -1,7 +1,38 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                tools:context="org.jquizmobile.app.FinalScreenActivity">
-
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="org.jquizmobile.app.FinalScreenActivity"
+                android:background="#3F51B5">
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#3F51B5">
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical"
+                      android:id="@+id/resultsLayout"
+                      style="@style/AppTheme.ContentLayout"
+                      android:padding="@dimen/content_layout_padding"
+                      android:minWidth="@dimen/questions_layout_min_width"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_marginTop="@dimen/view_margin_top"
+                      android:layout_marginBottom="@dimen/view_margin_bottom">
+            <TextView style="@style/MainTitle"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textAppearance="?android:attr/textAppearanceLarge"
+                      android:text="@string/results"
+                      android:id="@+id/jQuizLabelView" android:layout_gravity="center_horizontal"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Score:"
+                      android:id="@+id/scoreLabel"
+                      android:textAppearance="?android:attr/textAppearanceLarge"/>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:id="@+id/divider"
+                    style="@style/AppTheme.Divider"/>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

@@ -61,6 +61,11 @@ public class QuestionsActivity extends AppCompatActivity {
         loadQuestion();
     }
 
+    @Override
+    public void onBackPressed() {
+        //do nothing
+    }
+
     public void onAnswerButtonClick(View view) {
         addAnswersToSelected();
         currentQuestionIndex++;
