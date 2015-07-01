@@ -8,8 +8,6 @@ public class Answer implements Serializable {
 
     private boolean isCorrect;
 
-    private String description;
-
     private boolean isSelected;
 
     public Answer() {
@@ -29,14 +27,6 @@ public class Answer implements Serializable {
 
     public void setIsCorrect(boolean isCorrect) {
         this.isCorrect = isCorrect;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public boolean isSelected() {

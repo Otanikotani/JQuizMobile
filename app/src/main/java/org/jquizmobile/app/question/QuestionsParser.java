@@ -93,7 +93,6 @@ public class QuestionsParser {
         Answer answer = new Answer();
         answer.setAnswerText(answerJson.getString(ANSWER));
         answer.setIsCorrect(answerJson.getBoolean(CORRECT));
-        answer.setDescription(answerJson.getString(DESCRIPTION));
         return answer;
     }
 }

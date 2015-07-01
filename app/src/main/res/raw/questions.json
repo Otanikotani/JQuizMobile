@@ -1,255 +1,208 @@
 {
-  "questions" : [ {
+  "questions" :[ {
     "answers" : [ {
-      "answer" : "myLibrary.java",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "cafebabe",
+      "correct" : true
     }, {
-      "answer" : "ShowSomeClass.java",
-      "correct" : true,
-      "description" : "Description is not given"
+      "answer" : "Compilation error",
+      "correct" : false
     }, {
-      "answer" : "ShowSomeClass",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "Runtime error",
+      "correct" : false
     }, {
-      "answer" : "ShowSomeClass.class",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "1cafebabe",
+      "correct" : false
     }, {
-      "answer" : "Any file name with the java suffix will do",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "100000000",
+      "correct" : false
     } ],
-    "difficulty" : 1,
+    "description" : "<p>Decimal literals have a nice property that is not shared by hexadecimal or octal literals: Decimal literals are all positive [JLS 3.10.1]. To write a negative decimal constant, you use the unary negation operator (-) in combination with a decimal literal. In this way, you can write any int or long value, whether positive or negative, in decimal form, and negative decimal constants are clearly identifiable by the presence of a minus sign. Not so for hexadecimal and octal literals. They can take on both positive and negative values. Hex and octal literals are negative if their high-order bit is set. In this program, the number 0xcafebabe is an int constant with its high-order bit set, so it is negative. It is equivalent to the decimal value -889275714. </p><p>The addition performed by the program is a mixed-type computation: The left operand is of type long, and the right operand is of type int. To perform the computation, Java promotes the int value to a long with a widening primitive conversion [JLS 5.1.2] and adds the two long values. Because int is a signed integral type, the conversion performs sign extension: It promotes the negative int value to a numerically equal long value. </p><p>The right operand of the addition, 0xcafebabe, is promoted to the long value 0xffffffffcafebabeL. This value is then added to the left operand, which is 0x100000000L. When viewed as an int, the high-order 32 bits of the signextended right operand are -1, and the high-order 32 bits of the left operand are 1. Add these two values together and you get 0, which explains the absence of the leading 1 digit in the program’s output.</p>",
+    "difficulty" : 3,
     "multiple" : false,
-    "question" : "Consider the following program:\nimport myLibrary.*;\npublic class ShowSomeClass\n{\n// code for the class...\n}\nWhat is the name of the java file containing this program?",
+    "question" : "The following program adds two hexadecimal, or “hex,” literals and prints the result in hex. What does the program print?<pre><code><br/>public class JoyOfHex {<br/>\tpublic static void main(String[] args) {<br/>\t\tSystem.out.println(Long.toHexString(0x100000000L + 0xcafebabe));<br/>\t}<br/>}</code></pre>",
     "topics" : [ "General" ]
   }, {
     "answers" : [ {
-      "answer" : "In java, an instance field declared public generates a compilation error.",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "1000",
+      "correct" : false
     }, {
-      "answer" : "int is the name of a class available in the package java.lang",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "1000000",
+      "correct" : false
     }, {
-      "answer" : "Instance variable names may only contain letters and digits.",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "5",
+      "correct" : true
     }, {
-      "answer" : "A class has always a constructor (possibly automatically supplied by the java\ncompiler).",
-      "correct" : true,
-      "description" : "Description is not given"
+      "answer" : "24",
+      "correct" : false
     }, {
-      "answer" : "The more comments in a program, the faster the program runs.",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "0",
+      "correct" : false
     } ],
-    "difficulty" : 1,
+    "description" : "<p>The problem is that the computation of the constant MICROS_PER_DAY does overflow. Although the result of the computation fits in a long with room to spare, it doesn’t fit in an int. The computation is performed entirely in int arithmetic, and only after the computation completes is the result promoted to a long. By then, it’s too late: The computation has already overflowed, returning a value that is too low by a factor of 200. The promotion from int to long is a widening primitive conversion [JLS 5.1.2], which preserves the (incorrect) numerical value. This value is then divided by MILLIS_PER_DAY, which was computed correctly because it does fit in an int. The result of this division is 5. </p><p>So why is the computation performed in int arithmetic? Because all the factors that are multiplied together are int values. When you multiply two int values, you get another int value. Java does not have target typing, a language feature wherein the type of the variable in which a result is to be stored influences the type of the computation.</p>",
+    "difficulty" : 2,
     "multiple" : false,
-    "question" : "Which of the following is TRUE?",
+    "question" : "What does the program print?<pre><code>public class LongDivision {<br/>\tpublic static void main(String[] args) {<br/>\t\tfinal long MICROS_PER_DAY = 24 * 60 * 60 * 1000 * 1000;<br/>\t\tfinal long MILLIS_PER_DAY = 24 * 60 * 60 * 1000;<br/>\t\tSystem.out.println(MICROS_PER_DAY / MILLIS_PER_DAY);<br/>\t}<br/>}</pre></code>",
+    "topics" : [ "Arithmetic" ]
+  }, {
+    "answers" : [ {
+      "answer" : "Runtime error",
+      "correct" : false
+    }, {
+      "answer" : "Compilation error",
+      "correct" : false
+    }, {
+      "answer" : "-1",
+      "correct" : false
+    }, {
+      "answer" : "65535",
+      "correct" : true
+    }, {
+      "answer" : "4294967295",
+      "correct" : false
+    } ],
+    "description" : "<p>The program’s behavior depends critically on the sign extension behavior of casts. Java uses two’s-complement binary arithmetic, so the int value -1 has all 32 bits set. The cast from int to byte is straightforward. It performs a narrowing primitive conversion [JLS 5.1.3], which simply lops off all but the low-order 8 bits. This leaves a byte value with all 8 bits set, which (still) represents -1. </p><p>Because byte is a signed type, sign extension occurs when converting the byte value -1 to a char. The resulting char value has all 16 bits set, so it is equal to 2^16 - 1, or 65,535. The cast from char to int is also a widening primitive conversion, so the rule tells us that zero extension is performed rather than sign extension. The resulting int value is 65535, which is just what the program prints.</p>",
+    "difficulty" : 3,
+    "multiple" : false,
+    "question" : "Casts are used to convert a value from one type to another. This program uses three casts in succession. What does it print?<pre><code><br/>public class Multicast {<br/>\tpublic static void main(String[] args) {<br/>\t\tSystem.out.println((int) (char) (byte) -1);<br/>\t}<br/>}</code></pre>",
     "topics" : [ "General" ]
   }, {
     "answers" : [ {
-      "answer" : "6",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "Compilation error",
+      "correct" : false
     }, {
-      "answer" : "7",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "It compiles, but prints nothing",
+      "correct" : false
     }, {
-      "answer" : "8",
-      "correct" : true,
-      "description" : "Description is not given"
+      "answer" : "X88",
+      "correct" : true
     }, {
-      "answer" : "Columbia",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "XX",
+      "correct" : false
     }, {
-      "answer" : "river",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "88",
+      "correct" : false
     } ],
-    "difficulty" : 1,
+    "description" : "<p>The answer lies in a dark corner of the specification for the conditional operator [JLS 15.25]. Note that the types of the second and third operands are different from each other in both of the conditional expressions: x is of type char, whereas 0 and i are both of type int. </p><p>The rules for determining the result type of a conditional expression are too long and complex to reproduce in their entirety, but here are three key points.</p> <br/> <p>1. If the second and third operands have the same type, that is the type of the conditional expression. In other words, you can avoid the whole mess by steering clear of mixed-type computation. <br/> </p><p>2. If one of the operands is of type T where T is byte, short, or char and the other operand is a constant expression of type int whose value is representable in type T, the type of the conditional expression is T. <br/> </p><p>3. Otherwise, binary numeric promotion is applied to the operand types, and the type of the conditional expression is the promoted type of the second and third operands.</p> <br/> <p> In both expressions, the value of the int operand is 0, which is representable as a char. Only the int operand in the first expression, however, is constant (0); the int operand in the second expression is variable (i). Therefore, point 2 applies to the first expression and its return type is char. Point 3 applies to the second conditional expression, and its return type is the result of applying binary numeric promotion to int and char, which is int [JLS 5.6.2].</p>",
+    "difficulty" : 3,
     "multiple" : false,
-    "question" : "Consider the following code snippet\nString river = new String(“Columbia”);\nSystem.out.println(river.length());\nWhat is printed?",
+    "question" : "What does the following program print?<pre><code><br/>public class DosEquis {<br/>\tpublic static void main(String[] args) {<br/>\t\tchar x = 'X';<br/>\t\tint i = 0;<br/>\t\tSystem.out.print(true ? x : 0);<br/>\t\tSystem.out.print(false ? i : x);<br/>\t}<br/>}</code></pre>",
     "topics" : [ "General" ]
   }, {
     "answers" : [ {
-      "answer" : "must have the same name as the class it is declared within.",
-      "correct" : true,
-      "description" : "Description is not given"
+      "answer" : "Ha169",
+      "correct" : true
     }, {
-      "answer" : "is used to create objects.",
-      "correct" : true,
-      "description" : "Description is not given"
+      "answer" : "HaHa",
+      "correct" : false
     }, {
-      "answer" : "may be declared private",
-      "correct" : true,
-      "description" : "Description is not given"
+      "answer" : "Depends on machine default charset",
+      "correct" : false
     } ],
-    "difficulty" : 1,
-    "multiple" : true,
-    "question" : "CSC142 – Quiz 1 2\nA constructor",
+    "description" : "<p>As expected, the first call to System.out.print prints Ha: Its argument is the expression \"H\" + \"a\", which performs the obvious string concatenation. The second call to System.out.print is another story. Its argument is the expression ’H’ + ’a’. The problem is that ’H’ and ’a’ are char literals. Because neither operand is of type String, the + operator performs addition rather than string concatenation.</p>",
+    "difficulty" : 3,
+    "multiple" : false,
+    "question" : "What does the following program print?<pre><code><br/>public class LastLaugh {<br/>\tpublic static void main(String args[]) {<br/>\t\tSystem.out.print(\"H\" + \"a\");<br/>\t\tSystem.out.print('H' + 'a');<br/>\t}<br/>}</code></pre>",
     "topics" : [ "General" ]
   }, {
     "answers" : [ {
-      "answer" : "instance variables",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "Object",
+      "correct" : false
     }, {
-      "answer" : "instance methods",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "double array",
+      "correct" : true
     }, {
-      "answer" : "constructors",
-      "correct" : false,
-      "description" : "Description is not given"
-    }, {
-      "answer" : "all of the above",
-      "correct" : true,
-      "description" : "Description is not given"
-    }, {
-      "answer" : "none of the above",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "The program is illegal",
+      "correct" : false
     } ],
-    "difficulty" : 1,
+    "description" : "<p>Java’s overload resolution process operates in two phases. The first phase selects all the methods or constructors that are accessible and applicable. The second phase selects the most specific of the methods or constructors selected in the first phase. One method or constructor is less specific than another if it can accept any parameters passed to the other [JLS 15.12.2.5]. </p><p>In our program, both constructors are accessible and applicable. The constructor Confusing(Object) accepts any parameter passed to Confusing(double[]), so Confusing(Object) is less specific. (Every double array is an Object, but not every Object is a double array.) The most specific constructor is therefore Confusing(double[]), which explains the program’s output.</p>",
+    "difficulty" : 3,
     "multiple" : false,
-    "question" : "Which of the following may be part of a class definition?",
+    "question" : "The main method invokes a constructor, but which one? The program’s output depends on the answer. What does the program print, or is it even legal?<pre><code></br>public class Confusing {<br/>\tprivate Confusing(Object o) {<br/>\t\tSystem.out.println(\"Object\");<br/>\t}<br/>\tprivate Confusing(double[] dArray) {<br/>\t\tSystem.out.println(\"double array\");<br/>\t}<br/>\tpublic static void main(String[] args) {<br/>\t\tnew Confusing(null);<br/>\t}<br/>}</code></pre>",
     "topics" : [ "General" ]
   }, {
     "answers" : [ {
-      "answer" : "An application can in general be trusted whereas an applet can't.",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "Compilation error",
+      "correct" : false
     }, {
-      "answer" : "An applet must be executed in a browser environment.",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "2 woofs and 3 meows",
+      "correct" : false
     }, {
-      "answer" : "An applet is not able to access the files of the computer it runs on",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "3 woofs and 2 meows",
+      "correct" : false
     }, {
-      "answer" : "(A), (B) and (C).",
-      "correct" : true,
-      "description" : "Description is not given"
+      "answer" : "5 woofs and 5 meows",
+      "correct" : true
     }, {
-      "answer" : "None of the above",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "0 woofs and 0 meows",
+      "correct" : false
     } ],
-    "difficulty" : 1,
+    "description" : "<p>The sum of the number of woofs and meows printed by the program is 10, fully twice what it should be. The problem is that Dog and Cat inherit the count field from a common superclass, and count is a static field. A single copy of each static field is shared among its declaring class and all subclasses, so Dog and Cat use the same count field. Each call to woof or meow increments this field, so it is incremented five times. The program reads it twice, by calling Dog.getCount and Cat.getCount. In each case, 5 is returned and printed.</p>",
+    "difficulty" : 3,
     "multiple" : false,
-    "question" : "What is different between a Java applet and a Java application?",
+    "question" : "This program uses a Counter class to keep track of how many times each kind of house pet makes a noise. What does the program print?<pre><code><br/>class Counter {<br/>\tprivate static int count;<br/>\tpublic static void increment() { count++; }<br/>\tpublic static int getCount() { return count; }<br/>}<br/>class Dog extends Counter {<br/>\tpublic Dog() { }<br/>\tpublic void woof() { increment(); }<br/>}<br/>class Cat extends Counter {<br/>\tpublic Cat() { }<br/>\tpublic void meow() { increment(); }<br/>}<br/>public class Ruckus {<br/>\tpublic static void main(String[] args) {<br/>\t\tDog[] dogs = { new Dog(), new Dog() };<br/>\t\tfor (int i = 0; i < dogs.length; i++)<br/>\t\t\tdogs[i].woof();<br/>\t\tCat[] cats = { new Cat(), new Cat(), new Cat() };<br/>\t\tfor (int i = 0; i < cats.length; i++)<br/>\t\t\tcats[i].meow();<br/>\t\tSystem.out.print(Dog.getCount() + \" woofs and \");<br/>\t\tSystem.out.println(Cat.getCount() + \" meows\");<br/>\t}<br/>}</code></pre>",
     "topics" : [ "General" ]
   }, {
     "answers" : [ {
-      "answer" : "MyClass mc = new MyClass();",
-      "correct" : true,
-      "description" : "Description is not given"
+      "answer" : "woof woof",
+      "correct" : true
     }, {
-      "answer" : "MyClass mc = MyClass();",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "woof [with extra space]",
+      "correct" : false
     }, {
-      "answer" : "MyClass mc = MyClass;",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "woof",
+      "correct" : false
     }, {
-      "answer" : "MyClass mc = new MyClass;",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "Compilation error",
+      "correct" : false
     }, {
-      "answer" : "It can't be done. The constructor of MyClass should be defined as\npublic void MyClass(){/*code*/}",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "Undetermined",
+      "correct" : false
     } ],
-    "difficulty" : 1,
+    "description" : "<p>The problem is that bark is a static method, and there is no dynamic dispatch on static methods [JLS 15.12.4.4]. When a program calls a static method, the method to be invoked is selected at compile time, based on the compile-time type of the qualifier, which is the name we give to the part of the method invocation expression to the left of the dot. In this case, the qualifiers of the two method invocations are the variables woofer and nipper, both of which are declared to be of type Dog. Because they have the same compile-time type, the compiler causes the same method to be invoked: Dog.bark. This explains why the program prints woof woof. It doesn’t matter that the runtime type of nipper is Basenji; only its compile-time type is considered.</p>",
+    "difficulty" : 3,
     "multiple" : false,
-    "question" : "Consider\npublic class MyClass{\npublic MyClass(){/*code*/}\n// more code...\n}\nTo instantiate MyClass, you would write?",
+    "question" : "The following program models the behavioral difference between Basenjis and other dogs.In case you didn’t know,the Basenji is a breed of small,curly-tailed dogs of African origin that do not bark.What does the program print?<br/><pre><code><br/><br/>class Dog {<br/>\tpublic static void bark() {<br/>\t\tSystem.out.print(\"woof \");<br/>\t}<br/>}<br/><br/>class Basenji extends Dog {<br/>\tpublic static void bark() {<br/>\t}<br/>}<br/><br/>public class Bark {<br/>\tpublic static void main(String args[]) {<br/>\t\tDog woofer = new Dog();<br/>\t\tDog nipper = new Basenji();<br/>\t\twoofer.bark();<br/>\t\tnipper.bark();<br/>\t}<br/>}</code></pre>",
     "topics" : [ "General" ]
   }, {
     "answers" : [ {
-      "answer" : "The type of code generated by a Java compiler",
-      "correct" : true,
-      "description" : "Description is not given"
+      "answer" : "Runtime error",
+      "correct" : false
     }, {
-      "answer" : "The type of code generated by a Java Virtual Machine",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "Elvis wears a size 85 belt",
+      "correct" : false
     }, {
-      "answer" : "It is another name for a Java source file",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "Elvis wears a size -1930 belt",
+      "correct" : true
     }, {
-      "answer" : "It is the code written within the instance methods of a class.",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "Elvis wears a size 0 belt",
+      "correct" : false
     }, {
-      "answer" : "It is another name for comments written within a program.",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "Stack overflow error",
+      "correct" : false
     } ],
-    "difficulty" : 1,
+    "description" : "<p>This program suffers a problem caused by a circularity in the order of class initialization [JLS 12.4]. Let’s follow it in detail. Initialization of the class Elvis is triggered by the VM’s call to its main method. First, static fields are set to their default values [JLS 4.12.5]. The field INSTANCE is set to null, and CURRENT_YEAR is set to 0. Next, static field initializers are executed in order of appearance. The first static field is INSTANCE. Its value is computed by invoking the Elvis() constructor. </p><p>The constructor initializes beltSize to an expression involving the static field CURRENT_YEAR. Normally, reading a static field is one of the things that causes a class to be initialized, but we are already initializing the class Elvis. Recursive initialization attempts are simply ignored [JLS 12.4.2, step 3]. Consequently, the value of CURRENT_YEAR still has its default value of 0. That is why Elvis’s belt size turns out to be -1930. </p><p>Finally, returning from the constructor to complete the class initialization of Elvis, we initialize the static field CURRENT_YEAR to 2006, assuming you’re running the program in 2006. Unfortunately, it is too late for the now correct value of this field to affect the computation of Elvis.INSTANCE.beltSize, which already has the value -1930. This is the value that will be returned by all subsequent calls to Elvis.INSTANCE.beltSize().</p>",
+    "difficulty" : 4,
     "multiple" : false,
-    "question" : "What is byte code in the context of Java?",
+    "question" : "This program estimates his current belt size by projecting the trend observed during his public performances. The program uses the idiom Calendar.getInstance().get(Calendar.YEAR), which returns the current calendar year. What does the program print?<br/><pre><code>public class Elvis {<br/>\tpublic static final Elvis INSTANCE = new Elvis();<br/>\tprivate final int beltSize;<br/>\tprivate static final int CURRENT_YEAR =<br/>\t\t\tCalendar.getInstance().get(Calendar.YEAR);<br/>\tprivate Elvis() {<br/>\t\tbeltSize = CURRENT_YEAR - 1930;<br/>\t}<br/>\tpublic int beltSize() {<br/>\t\treturn beltSize;<br/>\t}<br/>\tpublic static void main(String[] args) {<br/>\t\tSystem.out.println(\"Elvis wears a size \" +<br/>\t\t\t\tINSTANCE.beltSize() + \" belt.\");<br/>\t}<br/>}</code></pre>",
     "topics" : [ "General" ]
   }, {
     "answers" : [ {
-      "answer" : "The operating system periodically deletes all of the java files available on the\nsystem.",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "Compilation error",
+      "correct" : false
     }, {
-      "answer" : "Any package imported in a program and not used is automatically deleted.",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "66666",
+      "correct" : false
     }, {
-      "answer" : "When all references to an object are gone, the memory used by the object is\nautomatically reclaimed.",
-      "correct" : true,
-      "description" : "Description is not given"
+      "answer" : "17777",
+      "correct" : true
     }, {
-      "answer" : "The JVM checks the output of any Java program and deletes anything that\ndoesn't make sense.",
-      "correct" : false,
-      "description" : "Description is not given"
-    }, {
-      "answer" : "Janitors working for Sun MicroSystems are required to throw away any\nMicrosoft documentation found in the employees' offices.",
-      "correct" : false,
-      "description" : "Description is not given"
+      "answer" : "66665",
+      "correct" : false
     } ],
-    "difficulty" : 1,
+    "description" : "<p>Things are seldom what they seem. Take this program, for instance. It doesn’t say what you think it does. Take a careful look at the two operands of the + operator. We are adding the int value 12345 to the long value 5432l. Note the subtle difference in shape between the digit 1 at the beginning of the left operand and the lowercase letter el at the end of the right operand. The digit 1 has an acute angle between the horizontal stroke, or arm, and the vertical stroke, or stem. The lowercase letter el, by contrast, has a right angle between the arm and the stem.</p>",
+    "difficulty" : 2,
     "multiple" : false,
-    "question" : "CSC142 – Quiz 1 3\nWhat is garbage collection in the context of Java?",
-    "topics" : [ "General" ]
-  }, {
-    "answers" : [ {
-      "answer" : "depth must be an int",
-      "correct" : false,
-      "description" : "Description is not given"
-    }, {
-      "answer" : "dive must be a method.",
-      "correct" : true,
-      "description" : "Description is not given"
-    }, {
-      "answer" : "dive must be the name of an instance field.",
-      "correct" : false,
-      "description" : "Description is not given"
-    }, {
-      "answer" : "submarine must be the name of a class",
-      "correct" : false,
-      "description" : "Description is not given"
-    }, {
-      "answer" : "submarine must be a method.",
-      "correct" : false,
-      "description" : "Description is not given"
-    } ],
-    "difficulty" : 1,
-    "multiple" : false,
-    "question" : "You read the following statement in a Java program that compiles and\nexecutes.\n submarine.dive(depth);\nWhat can you say for sure?",
-    "topics" : [ "General" ]
+    "question" : "What does it print?<pre><code>public class Elementary {<br/>\tpublic static void main(String[] args) {<br/>\t\tSystem.out.println(12345 + 5432l);<br/>\t}<br/>}</code></pre>",
+    "topics" : [ "Arithmetic" ]
   } ]
 }
