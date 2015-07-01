@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -68,17 +67,22 @@ public class FinalScreenActivity extends AppCompatActivity {
     private TextView getQuestionHeader(Question question) {
         TextView questionHeader = new TextView(this);
         questionHeader.setText((questions.indexOf(question) + 1) + ". " + question.getQuestionText());
-        questionHeader.setTextColor(0xFF000000);
+        questionHeader.setTextColor(getResources().getColor(R.color.primary_text_color));
         questionHeader.setGravity(Gravity.START);
         return questionHeader;
     }
 
     private View getDivider() {
         View divider = new View(this);
-        divider.setBackgroundColor(0xFFB6B6B6);
+        divider.setBackgroundColor(getResources().getColor(R.color.primary_divider_color));
         LinearLayout.LayoutParams layoutParams =
                 new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1);
-        layoutParams.setMargins(0, 5, 0, 5);
+        layoutParams.setMargins(
+                0,
+                Math.round(getResources().getDimension(R.dimen.divider_margin_top)),
+                0,
+                Math.round(getResources().getDimension(R.dimen.divider_margin_top))
+        );
         divider.setLayoutParams(layoutParams);
         return divider;
     }
@@ -89,7 +93,7 @@ public class FinalScreenActivity extends AppCompatActivity {
         answerRadio.setChecked(answer.isSelected());
         answerRadio.setEnabled(false);
         if (answer.isSelected()) {
-            answerRadio.setTextColor(answer.isCorrect() ? 0xFF4CAF50 : 0xFFF44336);
+            answerRadio.setTextColor(getAnswerTextColor(answer.isCorrect()));
         }
         return answerRadio;
     }
@@ -99,7 +103,20 @@ public class FinalScreenActivity extends AppCompatActivity {
         answerCheckBox.setText(answer.getAnswerText());
         answerCheckBox.setChecked(answer.isSelected());
         answerCheckBox.setEnabled(false);
-        answerCheckBox.setTextColor(0xFF000000);
+        if (answer.isSelected()) {
+            answerCheckBox.setTextColor(getAnswerTextColor(answer.isCorrect()));
+        } else if (answer.isCorrect()){
+            answerCheckBox.setTextColor(getResources().getColor(R.color.incorrect_answer));
+        }
         return answerCheckBox;
+    }
+
+    private int getAnswerTextColor(boolean isAnswerCorrect) {
+        return getResources().getColor(isAnswerCorrect ? R.color.correct_answer : R.color.incorrect_answer);
+    }
+
+    public void onTryAgainButtonClick(View view) {
+        Intent questionsActivity = new Intent(this, QuestionsActivity.class);
+        startActivity(questionsActivity);
     }
 }

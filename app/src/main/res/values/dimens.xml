@@ -9,4 +9,6 @@
     <dimen name="questions_layout_min_width">600dp</dimen>
     <dimen name="content_layout_margin_top">100dp</dimen>
     <dimen name="start_layout_min_width">400dp</dimen>
+    <dimen name="divider_margin_top">5dp</dimen>
+    <dimen name="divider_margin_bottom">5dp</dimen>
 </resources>

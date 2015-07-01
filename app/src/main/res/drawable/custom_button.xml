@@ -9,7 +9,7 @@
                android:insetBottom="@dimen/abc_button_inset_vertical_material">
             <shape android:shape="rectangle">
                 <corners android:radius="@dimen/abc_control_corner_material" />
-                <solid android:color="#303F9F"/>
+                <solid android:color="@color/primary_button_background_color"/>
                 <padding android:left="@dimen/abc_button_padding_horizontal_material"
                          android:top="@dimen/abc_button_padding_vertical_material"
                          android:right="@dimen/abc_button_padding_horizontal_material"
@@ -26,7 +26,7 @@
                android:insetBottom="@dimen/abc_button_inset_vertical_material">
             <shape android:shape="rectangle">
                 <corners android:radius="@dimen/abc_control_corner_material" />
-                <solid android:color="#303F9F"/>
+                <solid android:color="@color/primary_button_background_color"/>
                 <padding android:left="@dimen/abc_button_padding_horizontal_material"
                          android:top="@dimen/abc_button_padding_vertical_material"
                          android:right="@dimen/abc_button_padding_horizontal_material"
@@ -42,7 +42,7 @@
                android:insetBottom="@dimen/abc_button_inset_vertical_material">
             <shape android:shape="rectangle">
                 <corners android:radius="@dimen/abc_control_corner_material" />
-                <solid android:color="#303F9F"/>
+                <solid android:color="@color/primary_button_background_color"/>
                 <padding android:left="@dimen/abc_button_padding_horizontal_material"
                          android:top="@dimen/abc_button_padding_vertical_material"
                          android:right="@dimen/abc_button_padding_horizontal_material"
@@ -58,7 +58,7 @@
                android:insetBottom="@dimen/abc_button_inset_vertical_material">
             <shape android:shape="rectangle">
                 <corners android:radius="@dimen/abc_control_corner_material" />
-                <solid android:color="#B6B6B6"/>
+                <solid android:color="@color/secondary_button_background_color"/>
                 <padding android:left="@dimen/abc_button_padding_horizontal_material"
                          android:top="@dimen/abc_button_padding_vertical_material"
                          android:right="@dimen/abc_button_padding_horizontal_material"
