@@ -4,52 +4,42 @@
                 android:layout_height="match_parent"
                 tools:context="org.jquizmobile.app.FinalScreenActivity"
                 android:background="@color/primary_background_color">
-    <ScrollView android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/primary_background_color">
-        <LinearLayout android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:orientation="vertical"
-                      style="@style/AppTheme.ContentLayout"
-                      android:paddingTop="@dimen/content_layout_padding"
-                      android:paddingLeft="@dimen/content_layout_padding"
-                      android:paddingRight="@dimen/content_layout_padding"
-                      android:minWidth="@dimen/questions_layout_min_width"
-                      android:layout_gravity="center_horizontal"
-                      android:layout_marginTop="@dimen/view_margin_top">
-            <TextView style="@style/MainTitle"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:textAppearance="?android:attr/textAppearanceLarge"
-                      android:text="@string/results"
-                      android:id="@+id/jQuizLabelView" android:layout_gravity="center_horizontal"/>
-            <TextView style="@style/MainTitle"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="Score:"
-                      android:id="@+id/scoreLabel"
-                      android:textAppearance="?android:attr/textAppearanceLarge"/>
-            <View android:layout_width="match_parent"
-                  android:layout_height="1dp"
-                  android:id="@+id/divider"
-                  android:layout_marginTop="@dimen/divider_margin_top"
-                  android:layout_marginBottom="@dimen/divider_margin_bottom"
-                  style="@style/AppTheme.Divider"/>
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  style="@style/AppTheme.ContentLayout"
+                  android:padding="@dimen/content_layout_padding"
+                  android:layout_centerHorizontal="true"
+                  android:minWidth="@dimen/questions_layout_min_width"
+                  android:layout_marginTop="@dimen/view_margin_top">
+        <TextView style="@style/MainTitle"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceLarge"
+                  android:text="@string/results"
+                  android:id="@+id/jQuizLabelView"
+                  android:layout_gravity="center_horizontal"/>
+        <TextView style="@style/MainTitle"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/score"
+                  android:id="@+id/scoreLabel"
+                  android:textAppearance="?android:attr/textAppearanceLarge"/>
+        <View android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:id="@+id/divider"
+              android:layout_marginTop="@dimen/divider_margin_top"
+              android:layout_marginBottom="@dimen/divider_margin_bottom"
+              style="@style/AppTheme.Divider"/>
+        <ScrollView android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/primary_background_color">
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:orientation="vertical"
                           android:id="@+id/resultsLayout"
-                          android:paddingBottom="@dimen/content_layout_padding"
                           style="@style/AppTheme.ContentLayout">
             </LinearLayout>
-            <Button android:layout_width="@dimen/button_width"
-                    android:layout_height="@dimen/button_height"
-                    android:text="@string/try_again"
-                    android:id="@+id/tryAgainButton"
-                    android:onClick="onTryAgainButtonClick"
-                    style="@style/AppTheme.Button"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="@dimen/view_margin_bottom"/>
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
+    </LinearLayout>
 </RelativeLayout>

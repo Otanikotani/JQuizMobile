@@ -20,6 +20,6 @@ public class StartScreenActivity extends AppCompatActivity {
     }
 
     public void onHighscoreButtonClicked(View v) {
-
+        //todo
     }
 }

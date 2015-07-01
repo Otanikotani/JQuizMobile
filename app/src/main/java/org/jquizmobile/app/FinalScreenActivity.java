@@ -1,14 +1,13 @@
 package org.jquizmobile.app;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.TextView;
+import android.view.ViewGroup;
+import android.widget.*;
 import org.jquizmobile.app.question.Answer;
 import org.jquizmobile.app.question.Question;
 import static org.jquizmobile.app.QuestionsActivity.QUESTION_ID;
@@ -22,13 +21,18 @@ public class FinalScreenActivity extends AppCompatActivity {
 
     private List<Question> questions;
 
+    private int totalScore;
+
     private LinearLayout resultsLayout;
+
+    private TextView scoreLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_screen);
         resultsLayout = (LinearLayout) findViewById(R.id.resultsLayout);
+        scoreLabel = (TextView) findViewById(R.id.scoreLabel);
         fillQuestions();
         fillResultsLayout();
     }
@@ -53,15 +57,29 @@ public class FinalScreenActivity extends AppCompatActivity {
         for (Question question : questions) {
             resultsLayout.addView(getQuestionHeader(question));
             resultsLayout.addView(getDivider());
+            int selectedCorrectAnswersNumber = 0;
+            int correctAnswersNumber = 0;
             for (Answer answer : question.getAnswers()) {
+                if (answer.isCorrect()) {
+                    correctAnswersNumber++;
+                    if (answer.isSelected()) {
+                        selectedCorrectAnswersNumber++;
+                    }
+                }
                 resultsLayout.addView(
                         question.isMultiple()
                                 ? getAnswerCheckBox(answer)
                                 : getAnswerRadioButton(answer)
                 );
+
+            }
+            if (selectedCorrectAnswersNumber == correctAnswersNumber) {
+                totalScore += question.getDifficulty();
             }
             resultsLayout.addView(getDivider());
         }
+        resultsLayout.addView(getTryAgainButton());
+        scoreLabel.setText(getResources().getString(R.string.score) + " " + totalScore);
     }
 
     private TextView getQuestionHeader(Question question) {
@@ -118,5 +136,26 @@ public class FinalScreenActivity extends AppCompatActivity {
     public void onTryAgainButtonClick(View view) {
         Intent questionsActivity = new Intent(this, QuestionsActivity.class);
         startActivity(questionsActivity);
+    }
+
+    private Button getTryAgainButton() {
+        Button button = new Button(this);
+        button.setBackgroundResource(R.drawable.custom_button);
+        button.setTextColor(getResources().getColor(R.color.primary_button_text_color));
+        button.setText(R.string.try_again);
+        button.setGravity(Gravity.CENTER_HORIZONTAL);
+        button.setLayoutParams(
+                new ViewGroup.LayoutParams(
+                        Math.round(getResources().getDimension(R.dimen.button_width)),
+                        Math.round(getResources().getDimension(R.dimen.button_height))
+                )
+        );
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onTryAgainButtonClick(view);
+            }
+        });
+        return button;
     }
 }
