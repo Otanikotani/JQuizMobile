@@ -1,12 +1,11 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:textColorPrimary">@color/primary_text_color</item>
         <item name="android:background">@color/secondary_background_color</item>
-        <item name="android:windowContentTransitions">true</item>
 
+        <item name="android:windowContentTransitions">true</item>
         <item name="android:windowSharedElementsUseOverlay">false</item>
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
@@ -20,20 +19,5 @@
         <item name="android:windowSharedElementExitTransition">
             @transition/exit_transition
         </item>
-    </style>
-    <style name="AppTheme.ContentLayout">
-        <item name="android:background">@drawable/custom_layout</item>
-        <item name="android:textColor">@color/primary_text_color</item>
-    </style>
-    <style name="AppTheme.Button" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/custom_button</item>
-        <item name="android:textColor">@color/primary_button_text_color</item>
-        <item name="android:textColorPrimaryDisableOnly">@color/secondary_button_text_color</item>
-    </style>
-    <style name="AppTheme.Divider">
-        <item name="android:background">@color/primary_divider_color</item>
-    </style>
-    <style name="MainTitle">
-        <item name="android:fontFamily">sans-serif-thin</item>
     </style>
 </resources>

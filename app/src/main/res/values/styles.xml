@@ -5,6 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="android:textColorPrimary">@color/primary_text_color</item>
         <item name="android:background">@color/secondary_background_color</item>
+        <item name="android:windowBackground">@color/primary_background_color</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -14,13 +15,15 @@
     </style>
     <style name="AppTheme.Button" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/custom_button</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
         <item name="android:textColor">@color/primary_button_text_color</item>
+        <item name="android:textAllCaps">true</item>
         <item name="android:textColorPrimaryDisableOnly">@color/secondary_button_text_color</item>
     </style>
     <style name="AppTheme.Divider">
         <item name="android:background">@color/primary_divider_color</item>
     </style>
-    <style name="MainTitle">
+    <style name="MainTitle" parent="Base.TextAppearance.AppCompat.Display2">
         <item name="android:fontFamily">sans-serif-thin</item>
     </style>
 </resources>
