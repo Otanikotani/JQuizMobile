@@ -1,10 +1,16 @@
 package org.jquizmobile.app;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.widget.*;
 import org.apache.commons.io.IOUtils;
 import org.jquizmobile.app.question.Answer;
@@ -17,6 +23,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -58,14 +65,23 @@ public class QuestionsActivity extends AppCompatActivity {
             }
         };
         questionsNumberView = (TextView) findViewById(R.id.questionsNumberView);
+
+        // Postpone the transition until the window's decor view has
+        // finished its layout.
+        final Activity thisActivity = this;
+        ActivityCompat.postponeEnterTransition(thisActivity);
+        final View decor = getWindow().getDecorView();
+        decor.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                decor.getViewTreeObserver().removeOnPreDrawListener(this);
+                ActivityCompat.startPostponedEnterTransition(thisActivity);
+                return true;
+            }
+        });
+
         loadQuestions();
         drawQuestion();
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent questionsActivity = new Intent(this, QuestionsActivity.class);
-        startActivity(questionsActivity);
     }
 
     public void onAnswerButtonClick(View view) {
@@ -81,6 +97,17 @@ public class QuestionsActivity extends AppCompatActivity {
         } else {
             drawQuestion();
         }
+    }
+
+    public static void launch(Activity activity, View sharedElement, String transitionName) {
+        List<Pair<View, String>> pairs = new ArrayList<Pair<View, String>>();
+        View statusBar = activity.findViewById(android.R.id.statusBarBackground);
+        pairs.add(Pair.create(sharedElement, transitionName));
+        pairs.add(Pair.create(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME));
+
+        ActivityOptionsCompat transitionOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, pairs.get(0), pairs.get(1));
+        Intent intent = new Intent(activity, QuestionsActivity.class);
+        ActivityCompat.startActivity(activity, intent, transitionOptions.toBundle());
     }
 
     private void loadQuestions() {

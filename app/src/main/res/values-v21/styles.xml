@@ -5,8 +5,21 @@
         <!-- Customize your theme here. -->
         <item name="android:textColorPrimary">@color/primary_text_color</item>
         <item name="android:background">@color/secondary_background_color</item>
+        <item name="android:windowContentTransitions">true</item>
+
+        <item name="android:windowSharedElementsUseOverlay">false</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/enter_transition
+        </item>
+        <item name="android:windowSharedElementExitTransition">
+            @transition/exit_transition
+        </item>
     </style>
     <style name="AppTheme.ContentLayout">
         <item name="android:background">@drawable/custom_layout</item>
