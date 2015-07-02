@@ -38,11 +38,6 @@ public class FinalScreenActivity extends AppCompatActivity {
         fillResultsLayout();
     }
 
-    @Override
-    public void onBackPressed() {
-        //do nothing
-    }
-
     private void fillQuestions() {
         questions = new ArrayList<Question>();
         Bundle bundle = getIntent().getExtras();
