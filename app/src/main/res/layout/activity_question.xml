@@ -1,67 +1,80 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/primary_background_color">
-    <LinearLayout android:layout_width="wrap_content"
-                  android:id="@+id/questions_main_layout"
-                  android:layout_height="wrap_content"
-                  android:minWidth="@dimen/questions_layout_min_width"
-                  android:layout_gravity="center_horizontal"
-                  android:paddingStart="@dimen/content_layout_padding"
-                  android:paddingEnd="@dimen/content_layout_padding"
-                  android:orientation="vertical"
-                  android:transitionName="@string/question_transition"
-                  style="@style/AppTheme.ContentLayout">
-        <RelativeLayout android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-            <TextView
-                    style="@style/MainTitle"
+    android:layout_width="match_parent"
+    android:padding="@dimen/content_layout_padding"
+    android:background="@color/primary_background_color"
+    android:layout_height="match_parent">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="org.jquizmobile.app.QuestionsActivity"
+        android:transitionName="@string/question_transition"
+        android:orientation="vertical"
+        style="@style/AppTheme.ContentLayout">
+
+        <LinearLayout android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+            <RelativeLayout android:layout_width="match_parent"
+                android:padding="@dimen/content_layout_padding"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/SecondaryTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/jquiz_label_text"
                     android:id="@+id/jQuizLabelView"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"/>
-            <TextView
-                    style="@style/MainTitle"
+                    android:layout_alignTop="@+id/questionsNumberView"
+                    android:layout_centerHorizontal="true" />
+                <TextView
+                    style="@style/SecondaryTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Large Text"
+                    android:text="1/10"
                     android:id="@+id/questionsNumberView"
+                    android:layout_toLeftOf="@+id/jQuizLabelView"
+                    android:layout_toStartOf="@+id/jQuizLabelView"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
-        </RelativeLayout>
-        <View
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:id="@+id/divider"
                 style="@style/AppTheme.Divider"/>
-        <TextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/primary_text_color"
+                android:padding="@dimen/content_layout_padding"
                 android:text="Question"
                 android:id="@+id/questionView"
                 android:layout_marginTop="@dimen/view_margin_top"
                 android:layout_marginBottom="@dimen/view_margin_bottom"/>
-        <LinearLayout
+            <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/questionsLayout"
                 android:layout_gravity="start"
+                android:padding="@dimen/content_layout_padding"
                 android:layout_marginTop="@dimen/view_margin_top">
-        </LinearLayout>
-        <Button android:layout_width="@dimen/button_width"
+            </LinearLayout>
+            <Button android:layout_width="@dimen/button_width"
                 android:layout_height="@dimen/button_height"
+                android:layout_marginBottom="@dimen/view_margin_bottom"
                 android:text="@string/answer_button_text"
                 android:id="@+id/answerButton"
                 android:onClick="onAnswerButtonClick"
                 style="@style/AppTheme.Button"
                 android:layout_gravity="center_horizontal"/>
-    </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
 </ScrollView>

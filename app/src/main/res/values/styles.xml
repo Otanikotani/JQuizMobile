@@ -26,4 +26,7 @@
     <style name="MainTitle" parent="Base.TextAppearance.AppCompat.Display2">
         <item name="android:fontFamily">sans-serif-thin</item>
     </style>
+    <style name="SecondaryTitle" parent="Base.TextAppearance.AppCompat.Display1">
+        <item name="android:fontFamily">sans-serif-thin</item>
+    </style>
 </resources>
