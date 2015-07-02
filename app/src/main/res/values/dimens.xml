@@ -11,4 +11,7 @@
     <dimen name="start_layout_min_width">400dp</dimen>
     <dimen name="divider_margin_top">5dp</dimen>
     <dimen name="divider_margin_bottom">5dp</dimen>
+
+    <dimen name="card_radius">2dp</dimen>
+    <dimen name="card_elevation">10dp</dimen>
 </resources>
