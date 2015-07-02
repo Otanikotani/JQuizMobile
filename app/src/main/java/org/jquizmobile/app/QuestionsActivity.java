@@ -64,7 +64,8 @@ public class QuestionsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //do nothing
+        Intent questionsActivity = new Intent(this, QuestionsActivity.class);
+        startActivity(questionsActivity);
     }
 
     public void onAnswerButtonClick(View view) {
