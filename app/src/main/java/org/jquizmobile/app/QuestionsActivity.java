@@ -3,6 +3,7 @@ package org.jquizmobile.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.View;
 import android.widget.*;
 import org.apache.commons.io.IOUtils;
@@ -58,7 +59,7 @@ public class QuestionsActivity extends AppCompatActivity {
         };
         questionsNumberView = (TextView) findViewById(R.id.questionsNumberView);
         loadQuestions();
-        loadQuestion();
+        drawQuestion();
     }
 
     @Override
@@ -77,7 +78,7 @@ public class QuestionsActivity extends AppCompatActivity {
             }
             startActivity(finalScreenActivity);
         } else {
-            loadQuestion();
+            drawQuestion();
         }
     }
 
@@ -118,11 +119,11 @@ public class QuestionsActivity extends AppCompatActivity {
         return currentQuestionIndex < questions.size();
     }
 
-    private void loadQuestion() {
+    private void drawQuestion() {
         answerButton.setEnabled(false);
         questionsNumberView.setText((currentQuestionIndex + 1) + "/" + questions.size());
         Question currentQuestion = questions.get(currentQuestionIndex);
-        questionView.setText(currentQuestion.getQuestionText());
+        questionView.setText(Html.fromHtml(currentQuestion.getQuestionText()));
         questionsLayout.removeAllViews();
         if (currentQuestion.isMultiple()) {
             loadMultipleAnswersChoice(currentQuestion);

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,13 +79,12 @@ public class FinalScreenActivity extends AppCompatActivity {
             }
             resultsLayout.addView(getDivider());
         }
-        resultsLayout.addView(getTryAgainButton());
         scoreLabel.setText(getResources().getString(R.string.score) + " " + totalScore);
     }
 
     private TextView getQuestionHeader(Question question) {
         TextView questionHeader = new TextView(this);
-        questionHeader.setText((questions.indexOf(question) + 1) + ". " + question.getQuestionText());
+        questionHeader.setText(Html.fromHtml(question.getQuestionText()));
         questionHeader.setTextColor(getResources().getColor(R.color.primary_text_color));
         questionHeader.setGravity(Gravity.START);
         return questionHeader;
@@ -136,26 +136,5 @@ public class FinalScreenActivity extends AppCompatActivity {
     public void onTryAgainButtonClick(View view) {
         Intent questionsActivity = new Intent(this, QuestionsActivity.class);
         startActivity(questionsActivity);
-    }
-
-    private Button getTryAgainButton() {
-        Button button = new Button(this);
-        button.setBackgroundResource(R.drawable.custom_button);
-        button.setTextColor(getResources().getColor(R.color.primary_button_text_color));
-        button.setText(R.string.try_again);
-        button.setGravity(Gravity.CENTER_HORIZONTAL);
-        button.setLayoutParams(
-                new ViewGroup.LayoutParams(
-                        Math.round(getResources().getDimension(R.dimen.button_width)),
-                        Math.round(getResources().getDimension(R.dimen.button_height))
-                )
-        );
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onTryAgainButtonClick(view);
-            }
-        });
-        return button;
     }
 }
