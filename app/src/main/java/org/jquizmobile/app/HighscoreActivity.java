@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -27,28 +28,32 @@ public class HighscoreActivity extends AppCompatActivity {
 
     private List<Profile> profiles = new ArrayList<Profile>();
 
-    private Firebase jQuizDb;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscore);
         Firebase.setAndroidContext(this);
-        jQuizDb = new Firebase("https://incandescent-fire-9197.firebaseio.com");
-        jQuizDb.child("/profiles")
-                .orderByChild("highest_score")
-                .limitToLast(10)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        System.out.println(dataSnapshot.getValue());
-                    }
+        Firebase firebaseProfiles = new Firebase("https://incandescent-fire-9197.firebaseio.com/profiles");
+        firebaseProfiles.orderByChild("highest_score").limitToLast(10).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                HashMap<String, HashMap> profilesMap = (HashMap<String, HashMap>) dataSnapshot.getValue();
+                for (String profileName : profilesMap.keySet()) {
+                    Profile newProfile = new Profile();
+                    newProfile.setName(profileName);
+                    HashMap<String, Object> profileFields = (HashMap<String, Object>) profilesMap.get(profileName);
+                    newProfile.setAttempts((Long) profileFields.get("attempts"));
+                    newProfile.setAvatar((String) profileFields.get("avatar"));
+                    newProfile.setHighestScore((Long) profileFields.get("highest_score"));
+                    profiles.add(newProfile);
+                }
+            }
 
-                    @Override
-                    public void onCancelled(FirebaseError firebaseError) {
-                        System.out.println("Read is failed: " + firebaseError.getMessage());
-                    }
-                });
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                logger.error("Read is failed: " + firebaseError.getMessage());
+            }
+        });
     }
 
     public static void launch(Activity activity, View sharedElement, String transitionName) {
