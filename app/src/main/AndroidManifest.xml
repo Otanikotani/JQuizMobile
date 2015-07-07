@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.jquizmobile.app" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -23,6 +25,10 @@
         <activity
             android:name=".FinalScreenActivity"
             android:label="@string/title_activity_final_screen" >
+        </activity>
+        <activity
+            android:name=".HighscoreActivity"
+            android:label="@string/title_activity_highscore" >
         </activity>
     </application>
 

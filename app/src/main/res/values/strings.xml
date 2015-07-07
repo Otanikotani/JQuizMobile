@@ -13,4 +13,5 @@
     <string name="try_again">Try again</string>
     <string name="score">Score:</string>
     <string name="question_transition">question_transition</string>
+    <string name="title_activity_highscore">HighscoreActivity</string>
 </resources>

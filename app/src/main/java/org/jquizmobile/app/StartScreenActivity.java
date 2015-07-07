@@ -3,7 +3,6 @@ package org.jquizmobile.app;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.TextView;
 
 
 public class StartScreenActivity extends AppCompatActivity {
@@ -21,6 +20,6 @@ public class StartScreenActivity extends AppCompatActivity {
     }
 
     public void onHighscoreButtonClicked(View v) {
-        //todo
+        HighscoreActivity.launch(this, startScreenCardView, getString(R.string.question_transition));
     }
 }
