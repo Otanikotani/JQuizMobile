@@ -27,8 +27,12 @@ public class HighscoreActivity extends AppCompatActivity {
     public static final Logger logger = LoggerFactory.getLogger(HighscoreActivity.class);
 
     private static final String PARAM_ATTEMPTS = "attempts";
+
     private static final String PARAM_AVATAR = "avatar";
+
     private static final String PARAM_HIGHEST_SCORE = "highest_score";
+
+    private static final int MAX_PROFILES = 10;
 
     private List<Profile> profiles = new ArrayList<Profile>();
 
@@ -38,7 +42,7 @@ public class HighscoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_highscore);
         Firebase.setAndroidContext(this);
         Firebase firebaseProfiles = new Firebase("https://incandescent-fire-9197.firebaseio.com/profiles");
-        firebaseProfiles.orderByChild(PARAM_HIGHEST_SCORE).limitToLast(10).addValueEventListener(new ValueEventListener() {
+        firebaseProfiles.orderByChild(PARAM_HIGHEST_SCORE).limitToLast(MAX_PROFILES).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 HashMap<String, HashMap> profilesMap = (HashMap<String, HashMap>) dataSnapshot.getValue();
