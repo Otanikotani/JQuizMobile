@@ -26,6 +26,10 @@ public class HighscoreActivity extends AppCompatActivity {
 
     public static final Logger logger = LoggerFactory.getLogger(HighscoreActivity.class);
 
+    private static final String PARAM_ATTEMPTS = "attempts";
+    private static final String PARAM_AVATAR = "avatar";
+    private static final String PARAM_HIGHEST_SCORE = "highest_score";
+
     private List<Profile> profiles = new ArrayList<Profile>();
 
     @Override
@@ -34,17 +38,17 @@ public class HighscoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_highscore);
         Firebase.setAndroidContext(this);
         Firebase firebaseProfiles = new Firebase("https://incandescent-fire-9197.firebaseio.com/profiles");
-        firebaseProfiles.orderByChild("highest_score").limitToLast(10).addValueEventListener(new ValueEventListener() {
+        firebaseProfiles.orderByChild(PARAM_HIGHEST_SCORE).limitToLast(10).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 HashMap<String, HashMap> profilesMap = (HashMap<String, HashMap>) dataSnapshot.getValue();
                 for (String profileName : profilesMap.keySet()) {
                     Profile newProfile = new Profile();
                     newProfile.setName(profileName);
-                    HashMap<String, Object> profileFields = (HashMap<String, Object>) profilesMap.get(profileName);
-                    newProfile.setAttempts((Long) profileFields.get("attempts"));
-                    newProfile.setAvatar((String) profileFields.get("avatar"));
-                    newProfile.setHighestScore((Long) profileFields.get("highest_score"));
+                    HashMap<String, Object> profileParams = (HashMap<String, Object>) profilesMap.get(profileName);
+                    newProfile.setAttempts((Long) profileParams.get(PARAM_ATTEMPTS));
+                    newProfile.setAvatar((String) profileParams.get(PARAM_AVATAR));
+                    newProfile.setHighestScore((Long) profileParams.get(PARAM_HIGHEST_SCORE));
                     profiles.add(newProfile);
                 }
             }
