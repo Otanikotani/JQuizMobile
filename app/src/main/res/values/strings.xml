@@ -14,4 +14,6 @@
     <string name="score">Score:</string>
     <string name="question_transition">question_transition</string>
     <string name="title_activity_highscore">HighscoreActivity</string>
+    <string name="user_name">Name</string>
+    <string name="user_score">Score</string>
 </resources>

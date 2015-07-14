@@ -10,7 +10,7 @@ public class Profile implements Serializable {
 
     private String avatar;
 
-    private long highestScore;
+    private Long highestScore;
 
     public String getName() {
         return name;
@@ -36,11 +36,11 @@ public class Profile implements Serializable {
         this.avatar = avatar;
     }
 
-    public long getHighestScore() {
+    public Long getHighestScore() {
         return highestScore;
     }
 
-    public void setHighestScore(long highestScore) {
+    public void setHighestScore(Long highestScore) {
         this.highestScore = highestScore;
     }
 }
