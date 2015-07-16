@@ -58,16 +58,6 @@
                 android:id="@+id/questionView"
                 android:layout_marginTop="@dimen/view_margin_top"
                 android:layout_marginBottom="@dimen/view_margin_bottom"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/primary_text_color"
-                android:padding="@dimen/content_layout_padding"
-                android:text="Code block"
-                android:id="@+id/codeBlockView"
-                android:layout_marginTop="@dimen/view_margin_top"
-                android:layout_marginBottom="@dimen/view_margin_bottom"/>
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"

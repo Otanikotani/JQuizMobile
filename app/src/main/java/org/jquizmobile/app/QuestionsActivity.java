@@ -11,7 +11,13 @@ import android.text.Html;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
 import org.apache.commons.io.IOUtils;
 import org.jquizmobile.app.question.Answer;
 import org.jquizmobile.app.question.PrettifyHighlighter;
@@ -30,10 +36,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import prettify.PrettifyParser;
-import prettify.theme.ThemeDefault;
-import syntaxhighlight.ParseResult;
 import syntaxhighlight.Parser;
-import syntaxhighlight.SyntaxHighlighter;
 
 
 public class QuestionsActivity extends AppCompatActivity {
@@ -49,7 +52,6 @@ public class QuestionsActivity extends AppCompatActivity {
     private View.OnClickListener onAnswerClickListener;
 
     private TextView questionView;
-    private TextView mCodeBlockView;
 
     private LinearLayout questionsLayout;
 
@@ -64,7 +66,6 @@ public class QuestionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
         questionView = (TextView) findViewById(R.id.questionView);
-        mCodeBlockView =  (TextView) findViewById(R.id.codeBlockView);
         questionsLayout = (LinearLayout) findViewById(R.id.questionsLayout);
         answerButton = (Button) findViewById(R.id.answerButton);
         onAnswerClickListener = new View.OnClickListener() {
@@ -167,12 +168,14 @@ public class QuestionsActivity extends AppCompatActivity {
         Pattern pattern = Pattern.compile("<pre><code>(.+)</code></pre>");
         Matcher codeMatcher = pattern.matcher(currentQuestion.getQuestionText());
         if (codeMatcher.find()) {
-            String codeBlock = codeMatcher.group(1);
+            String codeBlock = codeMatcher.group(1).replace("<br/>", "\n").replace("\\t", "\t");
             PrettifyHighlighter highlighter = new PrettifyHighlighter();
             String highlighted = highlighter.highlight("java", codeBlock);
-            mCodeBlockView.setText(Html.fromHtml(highlighted));
+            questionView.setText(Html.fromHtml(currentQuestion.getQuestionText().replace("<pre><code>" +
+                    codeMatcher.group(1) + "</code></pre>", "") + highlighted));
+        } else {
+            questionView.setText(Html.fromHtml(currentQuestion.getQuestionText()));
         }
-        questionView.setText(Html.fromHtml(currentQuestion.getQuestionText()));
         questionsLayout.removeAllViews();
         if (currentQuestion.isMultiple()) {
             loadMultipleAnswersChoice(currentQuestion);
