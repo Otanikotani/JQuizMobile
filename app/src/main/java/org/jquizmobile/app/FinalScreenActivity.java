@@ -3,6 +3,7 @@ package org.jquizmobile.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.text.Html;
 import android.view.Gravity;
 import android.view.View;
@@ -27,14 +28,26 @@ public class FinalScreenActivity extends AppCompatActivity {
 
     private TextView scoreLabel;
 
+    private View finalScreenCardView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_screen);
         resultsLayout = (LinearLayout) findViewById(R.id.resultsLayout);
         scoreLabel = (TextView) findViewById(R.id.scoreLabel);
+        finalScreenCardView = findViewById(R.id.final_screen_card);
         fillQuestions();
         fillResultsLayout();
+    }
+
+    @Override
+    public void onBackPressed() {
+        launchStartActivity();
+    }
+
+    private void launchStartActivity() {
+        StartScreenActivity.launch(this, finalScreenCardView, getString(R.string.question_transition));
     }
 
     private void fillQuestions() {
@@ -128,7 +141,6 @@ public class FinalScreenActivity extends AppCompatActivity {
     }
 
     public void onTryAgainButtonClick(View view) {
-        Intent questionsActivity = new Intent(this, QuestionsActivity.class);
-        startActivity(questionsActivity);
+        QuestionsActivity.launch(this, finalScreenCardView, getString(R.string.question_transition));
     }
 }
