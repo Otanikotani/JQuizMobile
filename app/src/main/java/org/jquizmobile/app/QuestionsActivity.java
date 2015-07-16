@@ -11,9 +11,16 @@ import android.text.Html;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
 import org.apache.commons.io.IOUtils;
 import org.jquizmobile.app.question.Answer;
+import org.jquizmobile.app.question.PrettifyHighlighter;
 import org.jquizmobile.app.question.Question;
 import org.jquizmobile.app.question.QuestionsParser;
 import org.json.JSONException;
@@ -25,6 +32,11 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import prettify.PrettifyParser;
+import syntaxhighlight.Parser;
 
 
 public class QuestionsActivity extends AppCompatActivity {
@@ -151,7 +163,19 @@ public class QuestionsActivity extends AppCompatActivity {
         answerButton.setEnabled(false);
         questionsNumberView.setText((currentQuestionIndex + 1) + "/" + questions.size());
         Question currentQuestion = questions.get(currentQuestionIndex);
-        questionView.setText(Html.fromHtml(currentQuestion.getQuestionText()));
+
+        Parser parser = new PrettifyParser();
+        Pattern pattern = Pattern.compile("<pre><code>(.+)</code></pre>");
+        Matcher codeMatcher = pattern.matcher(currentQuestion.getQuestionText());
+        if (codeMatcher.find()) {
+            String codeBlock = codeMatcher.group(1).replace("<br/>", "\n").replace("\\t", "\t");
+            PrettifyHighlighter highlighter = new PrettifyHighlighter();
+            String highlighted = highlighter.highlight("java", codeBlock);
+            questionView.setText(Html.fromHtml(currentQuestion.getQuestionText().replace("<pre><code>" +
+                    codeMatcher.group(1) + "</code></pre>", "") + highlighted));
+        } else {
+            questionView.setText(Html.fromHtml(currentQuestion.getQuestionText()));
+        }
         questionsLayout.removeAllViews();
         if (currentQuestion.isMultiple()) {
             loadMultipleAnswersChoice(currentQuestion);
