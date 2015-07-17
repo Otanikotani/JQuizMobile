@@ -62,7 +62,6 @@ public class FinalScreenActivity extends AppCompatActivity {
         for (Question question : questions) {
             resultsLayout.addView(getQuestionText(question));
             resultsLayout.addView(getQuestionDescriptionText(question));
-            resultsLayout.addView(getDivider());
             int selectedCorrectAnswersNumber = 0;
             int correctAnswersNumber = 0;
             for (Answer answer : question.getAnswers()) {
@@ -107,7 +106,7 @@ public class FinalScreenActivity extends AppCompatActivity {
         View divider = new View(this);
         divider.setBackgroundColor(getResources().getColor(R.color.primary_divider_color));
         LinearLayout.LayoutParams layoutParams =
-                new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1);
+                new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2);
         layoutParams.setMargins(
                 0,
                 Math.round(getResources().getDimension(R.dimen.divider_margin_top)),
