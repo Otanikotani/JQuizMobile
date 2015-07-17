@@ -1,5 +1,7 @@
 package org.jquizmobile.app;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.text.Html;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -60,6 +63,7 @@ public class QuestionsActivity extends AppCompatActivity {
     private TextView questionsNumberView;
 
     private RadioGroup answersGroup;
+    private View mQuestionTransitionLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,7 @@ public class QuestionsActivity extends AppCompatActivity {
             }
         };
         questionsNumberView = (TextView) findViewById(R.id.questionsNumberView);
+        mQuestionTransitionLayout = findViewById(R.id.questionTransitionLayout);
 
         // Postpone the transition until the window's decor view has
         // finished its layout.
@@ -107,7 +112,29 @@ public class QuestionsActivity extends AppCompatActivity {
             }
             startActivity(finalScreenActivity);
         } else {
-            drawQuestion();
+            Animator questionAnimator = getNextQuestionAnimator();
+            questionAnimator.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animator) {
+                    drawQuestion();
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animator) {
+
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animator) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animator) {
+
+                }
+            });
+            questionAnimator.start();
         }
     }
 
@@ -182,6 +209,13 @@ public class QuestionsActivity extends AppCompatActivity {
         } else {
             loadSingleAnswerChoice(currentQuestion);
         }
+    }
+
+    private Animator getNextQuestionAnimator() {
+        ObjectAnimator animation = ObjectAnimator.ofFloat(mQuestionTransitionLayout, "rotationY", 0.0f, 360f);
+        animation.setDuration(500);
+        animation.setInterpolator(new AccelerateInterpolator());
+        return animation;
     }
 
     private void loadSingleAnswerChoice(Question currentQuestion) {
