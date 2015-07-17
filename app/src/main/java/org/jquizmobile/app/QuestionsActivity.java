@@ -1,6 +1,7 @@
 package org.jquizmobile.app;
 
 import android.animation.Animator;
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
@@ -112,7 +113,7 @@ public class QuestionsActivity extends AppCompatActivity {
             }
             startActivity(finalScreenActivity);
         } else {
-            Animator questionAnimator = getNextQuestionAnimator();
+            Animator questionAnimator = getNextQuestionCloseCurrentAnimator();
             questionAnimator.addListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animator) {
@@ -121,6 +122,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
                 @Override
                 public void onAnimationEnd(Animator animator) {
+                    getNextQuestionOpenNewAnimator().start();
 
                 }
 
@@ -211,11 +213,25 @@ public class QuestionsActivity extends AppCompatActivity {
         }
     }
 
-    private Animator getNextQuestionAnimator() {
-        ObjectAnimator animation = ObjectAnimator.ofFloat(mQuestionTransitionLayout, "rotationY", 0.0f, 360f);
-        animation.setDuration(500);
-        animation.setInterpolator(new AccelerateInterpolator());
-        return animation;
+    private AnimatorSet getNextQuestionCloseCurrentAnimator() {
+        AnimatorSet animatorSet = new AnimatorSet();
+        ObjectAnimator flipAnimation = ObjectAnimator.ofFloat(mQuestionTransitionLayout, "rotationY", 0.0f, 360f);
+        ObjectAnimator scaleDownX = ObjectAnimator.ofFloat(mQuestionTransitionLayout, "scaleX", 0.5f);
+        ObjectAnimator scaleDownY = ObjectAnimator.ofFloat(mQuestionTransitionLayout, "scaleY", 0.5f);
+        animatorSet.setDuration(1000);
+        animatorSet.setInterpolator(new AccelerateInterpolator());
+        animatorSet.playTogether(flipAnimation, scaleDownX, scaleDownY);
+        return animatorSet;
+    }
+
+    private AnimatorSet getNextQuestionOpenNewAnimator() {
+        AnimatorSet animatorSet = new AnimatorSet();
+        ObjectAnimator scaleUpX = ObjectAnimator.ofFloat(mQuestionTransitionLayout, "scaleX", 1f);
+        ObjectAnimator scaleUpY = ObjectAnimator.ofFloat(mQuestionTransitionLayout, "scaleY", 1f);
+        animatorSet.setDuration(1000);
+        animatorSet.setInterpolator(new AccelerateInterpolator());
+        animatorSet.playTogether(scaleUpX, scaleUpY);
+        return animatorSet;
     }
 
     private void loadSingleAnswerChoice(Question currentQuestion) {
