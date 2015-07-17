@@ -76,6 +76,7 @@ public class QuestionsParser {
         }
         question.setTopics(topics);
         question.setAnswers(getFilledAnswers(questionJson));
+        question.setDescription(questionJson.getString(DESCRIPTION));
         return question;
     }
 

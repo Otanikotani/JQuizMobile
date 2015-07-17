@@ -1,13 +1,10 @@
 package org.jquizmobile.app;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.text.Html;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.*;
 import org.jquizmobile.app.question.Answer;
 import org.jquizmobile.app.question.Question;
@@ -63,7 +60,8 @@ public class FinalScreenActivity extends AppCompatActivity {
 
     private void fillResultsLayout() {
         for (Question question : questions) {
-            resultsLayout.addView(getQuestionHeader(question));
+            resultsLayout.addView(getQuestionText(question));
+            resultsLayout.addView(getQuestionDescriptionText(question));
             resultsLayout.addView(getDivider());
             int selectedCorrectAnswersNumber = 0;
             int correctAnswersNumber = 0;
@@ -89,12 +87,20 @@ public class FinalScreenActivity extends AppCompatActivity {
         scoreLabel.setText(getResources().getString(R.string.score) + " " + totalScore);
     }
 
-    private TextView getQuestionHeader(Question question) {
-        TextView questionHeader = new TextView(this);
-        questionHeader.setText(Html.fromHtml(question.getQuestionText()));
-        questionHeader.setTextColor(getResources().getColor(R.color.primary_text_color));
-        questionHeader.setGravity(Gravity.START);
-        return questionHeader;
+    private TextView getQuestionText(Question question) {
+        TextView questionText = new TextView(this);
+        questionText.setText(Html.fromHtml(question.getQuestionText()));
+        questionText.setTextColor(getResources().getColor(R.color.primary_text_color));
+        questionText.setGravity(Gravity.START);
+        return questionText;
+    }
+
+    private TextView getQuestionDescriptionText(Question question) {
+        TextView questionDescriptionText = new TextView(this);
+        questionDescriptionText.setText(Html.fromHtml(question.getDescription()));
+        questionDescriptionText.setTextColor(getResources().getColor(R.color.primary_text_color));
+        questionDescriptionText.setGravity(Gravity.START);
+        return questionDescriptionText;
     }
 
     private View getDivider() {

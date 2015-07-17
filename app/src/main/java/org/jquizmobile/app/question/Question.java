@@ -15,6 +15,8 @@ public class Question implements Serializable {
 
     private List<Answer> answers;
 
+    private String description;
+
     public Question() {
 
     }
@@ -66,5 +68,13 @@ public class Question implements Serializable {
 
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
