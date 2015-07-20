@@ -240,7 +240,7 @@ public class QuestionsActivity extends AppCompatActivity {
             answersGroup = null;
         }
         answersGroup = new RadioGroup(this);
-        answersGroup.setId(R.id.answersGroupId);
+        answersGroup.setId(R.id.answers_group_id);
         for (Answer answer : currentQuestion.getAnswers()) {
             RadioButton answerRadioButton = new RadioButton(this);
             answerRadioButton.setText(answer.getAnswerText());

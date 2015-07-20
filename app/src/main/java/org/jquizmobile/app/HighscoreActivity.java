@@ -60,8 +60,8 @@ public class HighscoreActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-        fillProfiles();
+        Firebase.setAndroidContext(this);
+        fillHighscoreTableIfConnected();
     }
 
     public static void launch(Activity activity, View sharedElement, String transitionName) {
@@ -76,33 +76,16 @@ public class HighscoreActivity extends AppCompatActivity {
         ActivityCompat.startActivity(activity, intent, transitionOptions.toBundle());
     }
 
-    private void fillProfiles() {
-        Firebase.setAndroidContext(this);
+    private void fillHighscoreTable() {
         Firebase firebaseProfiles = new Firebase("https://incandescent-fire-9197.firebaseio.com/profiles");
         firebaseProfiles.orderByChild(PARAM_HIGHEST_SCORE).limitToLast(MAX_PROFILES)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         HashMap<String, HashMap> profilesMap = (HashMap<String, HashMap>) dataSnapshot.getValue();
-                        for (String profileName : profilesMap.keySet()) {
-                            Profile newProfile = new Profile();
-                            newProfile.setName(profileName);
-                            HashMap<String, Object> profileParams =
-                                    (HashMap<String, Object>) profilesMap.get(profileName);
-                            newProfile.setAttempts((Long) profileParams.get(PARAM_ATTEMPTS));
-                            newProfile.setAvatar((String) profileParams.get(PARAM_AVATAR));
-                            newProfile.setHighestScore((Long) profileParams.get(PARAM_HIGHEST_SCORE));
-                            profiles.add(newProfile);
-                        }
-                        Collections.sort(profiles, new Comparator<Profile>() {
-                            @Override
-                            public int compare(Profile profile, Profile t1) {
-                                return t1.getHighestScore().compareTo(profile.getHighestScore());
-                            }
-                        });
-                        fillHighscoreTable();
+                        fillProfiles(profilesMap);
+                        showHighscoreTableResults();
                     }
-
 
                     @Override
                     public void onCancelled(FirebaseError firebaseError) {
@@ -111,11 +94,59 @@ public class HighscoreActivity extends AppCompatActivity {
                 });
     }
 
-    private void fillHighscoreTable() {
-        for (Profile profile : profiles) {
+    private void fillHighscoreTableIfConnected() {
+        Firebase connectedRef = new Firebase("https://incandescent-fire-9197.firebaseio.com/.info/connected");
+        connectedRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                boolean connected = snapshot.getValue(Boolean.class);
+                if (connected) {
+                    fillHighscoreTable();
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError error) {
+                logger.error("Listener was cancelled" + error.getMessage());
+            }
+        });
+    }
+
+    private void fillProfiles(Map<String, HashMap> profilesMap) {
+        for (String profileName : profilesMap.keySet()) {
+            Profile newProfile = new Profile();
+            newProfile.setName(profileName);
+            HashMap<String, Object> profileParams =
+                    (HashMap<String, Object>) profilesMap.get(profileName);
+            newProfile.setAttempts((Long) profileParams.get(PARAM_ATTEMPTS));
+            newProfile.setAvatar((String) profileParams.get(PARAM_AVATAR));
+            newProfile.setHighestScore((Long) profileParams.get(PARAM_HIGHEST_SCORE));
+            profiles.add(newProfile);
+        }
+        Collections.sort(profiles, new Comparator<Profile>() {
+            @Override
+            public int compare(Profile profile, Profile t1) {
+                return t1.getHighestScore().compareTo(profile.getHighestScore());
+            }
+        });
+    }
+
+    private void showHighscoreTableResults() {
+        TableRow noHighscoresMessage = (TableRow) findViewById(R.id.no_highscores_message_id);
+        if (profiles != null && !profiles.isEmpty()) {
+            if (noHighscoresMessage != null) {
+                highscoreTableLayout.removeView(noHighscoresMessage);
+            }
+            for (Profile profile : profiles) {
+                TableRow tableRow = new TableRow(this);
+                tableRow.addView(getHighscoreTableCell(profile.getName()));
+                tableRow.addView(getHighscoreTableCell(String.valueOf(profile.getHighestScore())));
+                highscoreTableLayout.addView(tableRow);
+            }
+        } else if (noHighscoresMessage == null) {
             TableRow tableRow = new TableRow(this);
-            tableRow.addView(getHighscoreTableCell(profile.getName()));
-            tableRow.addView(getHighscoreTableCell(String.valueOf(profile.getHighestScore())));
+            tableRow.setId(R.id.no_highscores_message_id);
+            tableRow.addView(getHighscoreTableCell("No records found."));
             highscoreTableLayout.addView(tableRow);
         }
     }
