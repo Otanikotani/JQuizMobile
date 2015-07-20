@@ -6,6 +6,7 @@ import android.text.Html;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.*;
+import com.firebase.client.Firebase;
 import org.jquizmobile.app.question.Answer;
 import org.jquizmobile.app.question.Question;
 import static org.jquizmobile.app.QuestionsActivity.QUESTION_ID;
@@ -20,6 +21,8 @@ public class FinalScreenActivity extends AppCompatActivity {
     private List<Question> questions;
 
     private int totalScore;
+
+    private Firebase firebaseProfiles;
 
     private LinearLayout resultsLayout;
 
@@ -36,6 +39,8 @@ public class FinalScreenActivity extends AppCompatActivity {
         finalScreenCardView = findViewById(R.id.final_screen_card);
         fillQuestions();
         fillResultsLayout();
+        Firebase.setAndroidContext(this);
+        firebaseProfiles = new Firebase("https://incandescent-fire-9197.firebaseio.com/profiles");
     }
 
     @Override
@@ -147,5 +152,9 @@ public class FinalScreenActivity extends AppCompatActivity {
 
     public void onTryAgainButtonClick(View view) {
         QuestionsActivity.launch(this, finalScreenCardView, getString(R.string.question_transition));
+    }
+
+    public void onShareButtonClick(View view) {
+        //todo
     }
 }

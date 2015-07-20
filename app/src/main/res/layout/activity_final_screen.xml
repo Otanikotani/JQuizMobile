@@ -38,6 +38,14 @@
                           android:id="@+id/scoreLabel"
                           android:textAppearance="?android:attr/textAppearanceLarge"
                           android:layout_gravity="center_horizontal"/>
+                <Button
+                        android:layout_width="@dimen/button_width"
+                        android:layout_height="wrap_content"
+                        android:text="@string/share_button_text"
+                        android:id="@+id/share_button"
+                        android:layout_gravity="center_horizontal"
+                        style="@style/AppTheme.Button"
+                        android:onClick="onShareButtonClick"/>
                 <View android:layout_width="match_parent"
                       android:layout_height="2dp"
                       android:id="@+id/divider"

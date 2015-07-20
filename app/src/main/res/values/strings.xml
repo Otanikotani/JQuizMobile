@@ -16,4 +16,5 @@
     <string name="title_activity_highscore">HighscoreActivity</string>
     <string name="user_name">Name</string>
     <string name="user_score">Score</string>
+    <string name="share_button_text">Share</string>
 </resources>
